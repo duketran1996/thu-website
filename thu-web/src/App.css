@@ -4,3 +4,17 @@
   font-family: "Bungee Inline", cursive;
   src: url("https://fonts.googleapis.com/css?family=Bungee+Inline");
 }
+
+@import url("https://fonts.googleapis.com/css?family=Montez");
+
+@font-face {
+  font-family: "Montez", cursive;
+  src: url("https://fonts.googleapis.com/css?family=Montez");
+}
+
+@import url("https://fonts.googleapis.com/css?family=La+Belle+Aurore");
+
+@font-face {
+  font-family: "La Belle Aurore", cursive;
+  src: url("https://fonts.googleapis.com/css?family=La+Belle+Aurore");
+}

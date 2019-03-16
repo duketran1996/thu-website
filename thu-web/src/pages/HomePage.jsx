@@ -3,8 +3,25 @@ import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ToolbarView from "../shared/ToolbarView";
+import Trianglify from "../svg/trianglify.svg";
+import HomeIntro from "../animatedcomponents/HomeIntro";
 
 const styles = theme => ({
+  "@global": {
+    body: {
+      backgroundImage: `url(${Trianglify})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center center",
+      backgroundSize: "cover",
+      backgroundAttachment: "fixed",
+      height: "100%",
+      width: "100%"
+    },
+    html: {
+      height: "100%"
+    }
+  },
+
   root: {
     display: "flex"
   },
@@ -14,13 +31,12 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3
   },
 
-  myName: {
-    fontSize: "80px",
-    marginTop: theme.spacing.unit * 30,
+  homeIntroCss: {
+    marginTop: theme.spacing.unit * 40,
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
+      width: 900,
       marginLeft: "auto",
       marginRight: "auto"
     }
@@ -41,7 +57,9 @@ class HomePage extends React.Component {
         <CssBaseline />
         <ToolbarView />
         <main className={classes.content}>
-          <div className={classes.myName} />
+          <div className={classes.homeIntroCss}>
+            <HomeIntro />
+          </div>
         </main>
       </div>
     );

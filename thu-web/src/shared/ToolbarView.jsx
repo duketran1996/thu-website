@@ -6,7 +6,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import AboutButton from "../components/AboutButton";
 import ContactButton from "../components/ContactButton";
 import ResearchButton from "../components/ResearchButton";
-import { ReactComponent as ThuSign } from "../svg/thusign.svg";
+import Vivus from "vivus";
+import ThuSign from "../svg/thusign.svg";
 
 const styles = theme => ({
   root: {
@@ -42,15 +43,36 @@ const styles = theme => ({
     display: "inline-block",
     verticalAlign: "middle",
     width: "70%"
+  },
+
+  thuSignCss: {
+    width: "80%"
   }
 });
 
 class ToolbarView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fill: 0
+    };
   }
+
+  componentDidMount() {
+    new Vivus(
+      "thusign",
+      { duration: 150, file: ThuSign },
+      function finish() {
+        this.setState({ fill: 1 });
+      }.bind(this)
+    );
+  }
+
   render() {
+    const fill = {
+      fillOpacity: this.state.fill,
+      transition: "fill-opacity 0.2s"
+    };
     const { classes } = this.props;
     return (
       <div className={classes.root}>
@@ -58,7 +80,7 @@ class ToolbarView extends React.Component {
           <Toolbar className={classes.toolCss}>
             <div className={classes.rowCss}>
               <div className={classes.titleContainerCss}>
-                <ThuSign className={classes.thuSignCss} />
+                <div id="thusign" className={classes.thuSignCss} style={fill} />
               </div>
               <div className={classes.buttonContainerCss}>
                 <ContactButton />
