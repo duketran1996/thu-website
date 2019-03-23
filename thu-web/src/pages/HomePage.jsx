@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ToolbarView from "../shared/ToolbarView";
-import Trianglify from "../svg/trianglify.svg";
+import TrianglifyHome from "../svg/trianglifyHome.svg";
 import HomeIntro from "../animatedcomponents/HomeIntro";
 
 const styles = theme => ({
   "@global": {
     body: {
-      backgroundImage: `url(${Trianglify})`,
+      backgroundImage: `url(${TrianglifyHome})`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center center",
       backgroundSize: "cover",
@@ -49,7 +49,6 @@ class HomePage extends React.Component {
     this.state = {};
   }
   render() {
-    var { isLoaded, items } = this.state;
     const { classes } = this.props;
 
     return (
