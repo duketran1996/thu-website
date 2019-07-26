@@ -3,30 +3,10 @@ import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import ToolbarView from "../shared/ToolbarView";
-import TrianglifyAbout from "../svg/trianglifyAbout.svg";
-import ThuCorgie from "../pictures/thucorgie.JPG";
 
 const styles = theme => ({
-  "@global": {
-    body: {
-      backgroundImage: `url(${TrianglifyAbout})`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center center",
-      backgroundSize: "cover",
-      backgroundAttachment: "fixed",
-      height: "100%",
-      width: "100%"
-    },
-    html: {
-      height: "100%"
-    }
-  },
-
   root: {
     display: "flex"
   },
@@ -36,43 +16,31 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3
   },
 
-  cover: {
-    borderRadius: 10,
-    width: 450
-  },
-
   card: {
     display: "flex",
     borderRadius: 20,
-    height: 600,
-    marginTop: theme.spacing.unit * 20,
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 1000,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
+    width: 900,
+    height: 500,
+    marginTop: theme.spacing.unit * 18
   },
 
   title: {
     fontFamily: "La Belle Aurore",
     fontSize: "2.5em",
     fontWeight: "bold",
-    marginLeft: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit * 20,
     marginBottom: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2
   },
 
   contentabout: {
-    width: 450,
+    width: 650,
     lineHeight: "2em",
     fontSize: "18px",
     fontWeight: 400,
     fontFamily: "Neue Helvetica",
-
     letterSpacing: ".011em",
-    marginLeft: theme.spacing.unit * 3
+    marginLeft: theme.spacing.unit * 20
   }
 });
 
@@ -87,14 +55,8 @@ class AboutPage extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <ToolbarView />
         <main className={classes.content}>
           <Card className={classes.card}>
-            <CardMedia
-              className={classes.cover}
-              image={ThuCorgie}
-              title="Thu and Corgie"
-            />
             <CardContent className={classes.content}>
               <Typography component="h5" variant="h5" className={classes.title}>
                 Nice to meet you !

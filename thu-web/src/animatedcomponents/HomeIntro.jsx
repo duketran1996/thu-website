@@ -29,7 +29,7 @@ const trailsText = {
 };
 
 const items = ["\"I'm a 'blue sky thinker' and dream big.\"", "-Hilary Knight"];
-const config = { mass: 5, tension: 2000, friction: 200 };
+const config = { mass: 5, tension: 250, friction: 200 };
 
 function HomeIntro() {
   const [toggle] = useState(true);

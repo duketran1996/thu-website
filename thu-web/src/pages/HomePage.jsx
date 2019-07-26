@@ -2,26 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import withStyles from "@material-ui/core/styles/withStyles";
-import ToolbarView from "../shared/ToolbarView";
-import TrianglifyHome from "../svg/trianglifyHome.svg";
 import HomeIntro from "../animatedcomponents/HomeIntro";
 
 const styles = theme => ({
-  "@global": {
-    body: {
-      backgroundImage: `url(${TrianglifyHome})`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center center",
-      backgroundSize: "cover",
-      backgroundAttachment: "fixed",
-      height: "100%",
-      width: "100%"
-    },
-    html: {
-      height: "100%"
-    }
-  },
-
   root: {
     display: "flex"
   },
@@ -54,7 +37,6 @@ class HomePage extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <ToolbarView />
         <main className={classes.content}>
           <div className={classes.homeIntroCss}>
             <HomeIntro />

@@ -8,6 +8,8 @@ import ContactButton from "../components/ContactButton";
 import ResearchButton from "../components/ResearchButton";
 import Vivus from "vivus";
 import ThuSign from "../svg/thusign.svg";
+import { HashLink as Link } from "react-router-hash-link";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -78,16 +80,30 @@ class ToolbarView extends React.Component {
       <div className={classes.root}>
         <AppBar className={classes.appCss} position="static">
           <Toolbar className={classes.toolCss}>
-            <div className={classes.rowCss}>
-              <div className={classes.titleContainerCss}>
-                <div id="thusign" className={classes.thuSignCss} style={fill} />
+            <Router>
+              <div className={classes.rowCss}>
+                <div className={classes.titleContainerCss}>
+                  <Link smooth to="/#home">
+                    <div
+                      id="thusign"
+                      className={classes.thuSignCss}
+                      style={fill}
+                    />
+                  </Link>
+                </div>
+                <div className={classes.buttonContainerCss}>
+                  <Link smooth to="/#contact">
+                    <ContactButton />
+                  </Link>
+                  <Link smooth to="/#research">
+                    <ResearchButton />
+                  </Link>
+                  <Link smooth to="/#about">
+                    <AboutButton />
+                  </Link>
+                </div>
               </div>
-              <div className={classes.buttonContainerCss}>
-                <ContactButton />
-                <ResearchButton />
-                <AboutButton />
-              </div>
-            </div>
+            </Router>
           </Toolbar>
         </AppBar>
       </div>
