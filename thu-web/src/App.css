@@ -18,3 +18,24 @@
   font-family: "La Belle Aurore", cursive;
   src: url("https://fonts.googleapis.com/css?family=La+Belle+Aurore");
 }
+
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+
+@font-face {
+  font-family: "Pacifico", cursive;
+  src: url("https://fonts.googleapis.com/css?family=Pacifico");
+}
+
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface");
+
+@font-face {
+  font-family: "Abril Fatface";
+  src: url("https://fonts.googleapis.com/css?family=Abril+Fatface");
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+@font-face {
+  font-family: "Roboto";
+  src: url("https://fonts.googleapis.com/css?family=Roboto");
+}

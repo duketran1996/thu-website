@@ -1,126 +1,167 @@
 import React from "react";
-import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import ToolbarView from "../shared/ToolbarView";
-import TrianglifyAbout from "../svg/trianglifyAbout.svg";
-import ThuCorgie from "../pictures/thucorgie.JPG";
+import Intro from "../animatedcomponents/Intro";
+import Box from "../animatedcomponents/Box";
+import { config } from "react-spring";
+import ThuPic from "../animatedcomponents/ThuPic";
+import { makeStyles } from "@material-ui/styles";
+import ThuAoDai from "../pictures/thuaodai.JPG";
+import ThuPinkFlower from "../pictures/thupinkflower.JPG";
+import ThuGrad from "../pictures/thugrad.JPG";
 
-const styles = theme => ({
-  "@global": {
-    body: {
-      backgroundImage: `url(${TrianglifyAbout})`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center center",
-      backgroundSize: "cover",
-      backgroundAttachment: "fixed",
-      height: "100%",
-      width: "100%"
-    },
-    html: {
-      height: "100%"
-    }
-  },
-
+const useStyles = makeStyles({
   root: {
-    display: "flex"
+    position: "relative"
   },
 
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3
+  layer_one: {
+    position: "absolute",
+    zIndex: 1,
+    background: "linear-gradient(to right, #ECCC93 20%, #EDB94C 100%)",
+    width: "100vw",
+    height: "100vh"
   },
 
-  cover: {
-    borderRadius: 10,
-    width: 450
+  box_one_about: {
+    position: "absolute",
+    zIndex: 2
   },
 
-  card: {
-    display: "flex",
-    borderRadius: 20,
-    height: 600,
-    marginTop: theme.spacing.unit * 20,
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 1000,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
+  box_two_about: {
+    position: "absolute",
+    zIndex: 2
   },
 
-  title: {
-    fontFamily: "La Belle Aurore",
-    fontSize: "2.5em",
-    fontWeight: "bold",
-    marginLeft: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 2,
-    marginTop: theme.spacing.unit * 2
+  intro_about: {
+    position: "absolute",
+    zIndex: 4,
+    width: "50vw",
+    height: "auto",
+    transform: "translate(116%, 46%)"
   },
 
-  contentabout: {
-    width: 450,
-    lineHeight: "2em",
-    fontSize: "18px",
-    fontWeight: 400,
-    fontFamily: "Neue Helvetica",
+  thu_pic_one: {
+    position: "absolute",
+    zIndex: 4,
+    width: "auto",
+    height: "auto",
+    transform: "translate(24%, 16%)"
+  },
 
-    letterSpacing: ".011em",
-    marginLeft: theme.spacing.unit * 3
+  thu_pic_two: {
+    position: "absolute",
+    zIndex: 4,
+    width: "auto",
+    height: "auto",
+    marginTop: "620px",
+    marginLeft: "560px"
   }
 });
 
-class AboutPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    const { classes } = this.props;
+const messages = [
+  "I am a biology and chemistry student with experience in",
+  "molecular biology including DNA cloning, protein expression,",
+  "purification, and characterization. I am engaged in community",
+  "volunteering services though UNICEF as well as instructing",
+  "advanced high school mathematics as an assistant teacher at",
+  "Fairmont Preparatory Academy. I am passionate about drug",
+  "development and saving people’s lives through science. As an",
+  "undergraduate student at University of California, Irvine, I am",
+  "currently working for Professor Gregory Weiss on structural",
+  "characterization for a quinone synthetase."
+];
 
-    return (
+export default function AboutPage() {
+  const classes = useStyles();
+
+  return (
+    <>
+      <CssBaseline />
       <div className={classes.root}>
-        <CssBaseline />
-        <ToolbarView />
-        <main className={classes.content}>
-          <Card className={classes.card}>
-            <CardMedia
-              className={classes.cover}
-              image={ThuCorgie}
-              title="Thu and Corgie"
-            />
-            <CardContent className={classes.content}>
-              <Typography component="h5" variant="h5" className={classes.title}>
-                Nice to meet you !
-              </Typography>
-              <Typography className={classes.contentabout}>
-                I am a biology and chemistry student with experience in
-                molecular biology including DNA cloning, protein expression,
-                purification, and characterization. I am engaged in community
-                volunteering services though UNICEF as well as instructing
-                advanced high school mathematics as an assistant teacher at
-                Fairmont Preparatory Academy. I am passionate about drug
-                development and saving people’s lives through science. As an
-                undergraduate student at University of California, Irvine, I am
-                currently working for Professor Gregory Weiss on structural
-                characterization for a quinone synthetase.
-              </Typography>
-            </CardContent>
-          </Card>
-        </main>
+        <div className={classes.layer_one} />
+        <div className={classes.box_one_about}>
+          <Box
+            rootPosition="relative"
+            rootWidth="100vw"
+            rootHeight="100vh"
+            rootTransform="scaleY(-1)"
+            leftFrom="0%"
+            widthFrom="0%"
+            heightFrom="0%"
+            colorFrom="white"
+            opacityFrom="1"
+            boxShadowFrom="unset"
+            leftTo="50%"
+            widthTo="46%"
+            heightTo="80%"
+            colorTo="white"
+            opacityTo="1"
+            boxShadowTo="unset"
+            configType={config.molasses}
+          />
+        </div>
+        <div className={classes.box_two_about}>
+          <Box
+            rootPosition="relative"
+            rootWidth="100vw"
+            rootHeight="100vh"
+            rootTransform="scaleX(-1)"
+            leftFrom="0%"
+            widthFrom="0%"
+            heightFrom="0%"
+            colorFrom="black"
+            opacityFrom="1"
+            boxShadowFrom="unset"
+            leftTo="50%"
+            widthTo="50%"
+            heightTo="80%"
+            colorTo="black"
+            opacityTo="1"
+            boxShadowTo="unset"
+            configType={config.molasses}
+          />
+        </div>
+        <div className={classes.intro_about}>
+          <Intro
+            toggle={true}
+            messages={messages}
+            delay={500}
+            configType={config.molasses}
+            heightTrail={80}
+            trailsTextHeight="40px"
+            trailsTextLetterSpacing="0.011em"
+            trailTextFontSize={21}
+            trailTextFontWeight={400}
+            trailTextColor="white"
+          />
+        </div>
+        <div className={classes.thu_pic_one}>
+          <ThuPic
+            widthFrom="30vw"
+            heightFrom="0vh"
+            widthTo="30vw"
+            heightTo="78vh"
+            delay={1000}
+            scale={1.4}
+            yTilt={2}
+            xTilt={6.2}
+            picture={ThuAoDai}
+          />
+        </div>
+        <div className={classes.thu_pic_two}>
+          <ThuPic
+            widthFrom="26vw"
+            heightFrom="0vh"
+            widthTo="26vw"
+            heightTo="30vh"
+            delay={1200}
+            scale={1.4}
+            yTilt={1.2}
+            xTilt={2.2}
+            picture={ThuGrad}
+          />
+        </div>
       </div>
-    );
-  }
+    </>
+  );
 }
-
-AboutPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(AboutPage);

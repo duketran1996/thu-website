@@ -1,72 +1,114 @@
 import React from "react";
-import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import withStyles from "@material-ui/core/styles/withStyles";
-import ToolbarView from "../shared/ToolbarView";
-import TrianglifyHome from "../svg/trianglifyHome.svg";
-import HomeIntro from "../animatedcomponents/HomeIntro";
+import { config } from "react-spring";
+import Intro from "../animatedcomponents/Intro";
+import Box from "../animatedcomponents/Box";
+import GreetingHome from "../animatedcomponents/GreetingHome";
+import Pug from "../animatedcomponents/Pug";
+import { makeStyles } from "@material-ui/styles";
 
-const styles = theme => ({
-  "@global": {
-    body: {
-      backgroundImage: `url(${TrianglifyHome})`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center center",
-      backgroundSize: "cover",
-      backgroundAttachment: "fixed",
-      height: "100%",
-      width: "100%"
-    },
-    html: {
-      height: "100%"
-    }
-  },
-
+const useStyles = makeStyles({
   root: {
-    display: "flex"
+    position: "relative"
   },
 
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3
+  layer_one: {
+    position: "absolute",
+    zIndex: 1,
+    background: "black",
+    width: "100vw",
+    height: "100vh"
   },
 
-  homeIntroCss: {
-    marginTop: theme.spacing.unit * 40,
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 900,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
+  box_home: {
+    position: "relative",
+    zIndex: 2,
+    width: "100%",
+    height: "100%"
+  },
+
+  greeting_home: {
+    position: "absolute",
+    zIndex: 3,
+    width: "12%",
+    height: "18%",
+    top: "40%",
+    left: "28%",
+    transform: "translateY(-40%)"
+  },
+
+  intro_home: {
+    position: "absolute",
+    zIndex: 4,
+    width: "30%",
+    height: "auto",
+    top: "40%",
+    left: "45%",
+    transform: "translateY(-40%)"
+  },
+
+  pug: {
+    position: "absolute",
+    zIndex: 5,
+    width: "40%",
+    height: "44%",
+    top: "56%",
+    left: "22%"
   }
 });
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    const { classes } = this.props;
+const messages = ["I am ...", "Thu Nguyen"];
 
-    return (
+export default function HomePage() {
+  const classes = useStyles();
+
+  return (
+    <>
+      <CssBaseline />
       <div className={classes.root}>
-        <CssBaseline />
-        <ToolbarView />
-        <main className={classes.content}>
-          <div className={classes.homeIntroCss}>
-            <HomeIntro />
-          </div>
-        </main>
+        <div className={classes.layer_one} />
+        <div className={classes.box_home}>
+          <Box
+            rootPosition="relative"
+            rootWidth="100vw"
+            rootHeight="100vh"
+            rootTransform="unset"
+            leftFrom="100%"
+            widthFrom="0%"
+            heightFrom="100%"
+            colorFrom="white"
+            opacityFrom="1"
+            boxShadowFrom="unset"
+            leftTo="100%"
+            widthTo="40%"
+            heightTo="100%"
+            colorTo="white"
+            opacityTo="1"
+            boxShadowTo="unset"
+            configType={config.molasses}
+          />
+        </div>
+        <div className={classes.greeting_home}>
+          <GreetingHome />
+        </div>
+        <div className={classes.intro_home}>
+          <Intro
+            toggle={true}
+            messages={messages}
+            delay={500}
+            configType={config.molasses}
+            heightTrail={110}
+            trailsTextHeight="auto"
+            trailsTextLetterSpacing="-0.015em"
+            trailTextFontSize={64}
+            trailTextFontWeight={600}
+            trailTextColor="white"
+          />
+        </div>
+        <div className={classes.pug}>
+          <Pug />
+        </div>
       </div>
-    );
-  }
+    </>
+  );
 }
-
-HomePage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(HomePage);

@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import AboutButton from "../components/AboutButton";
-import ContactButton from "../components/ContactButton";
-import ResearchButton from "../components/ResearchButton";
+import ToolbarButton from "../components/ToolbarButton";
 import Vivus from "vivus";
 import ThuSign from "../svg/thusign.svg";
 
@@ -56,6 +54,7 @@ class ToolbarView extends React.Component {
     this.state = {
       fill: 0
     };
+    this.handleClickPage = this.handleClickPage.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +65,10 @@ class ToolbarView extends React.Component {
         this.setState({ fill: 1 });
       }.bind(this)
     );
+  }
+
+  handleClickPage(pageNum) {
+    this.props.onCurrentPage(pageNum);
   }
 
   render() {
@@ -79,13 +82,28 @@ class ToolbarView extends React.Component {
         <AppBar className={classes.appCss} position="static">
           <Toolbar className={classes.toolCss}>
             <div className={classes.rowCss}>
-              <div className={classes.titleContainerCss}>
+              <div
+                className={classes.titleContainerCss}
+                onClick={() => this.handleClickPage(0)}
+              >
                 <div id="thusign" className={classes.thuSignCss} style={fill} />
               </div>
               <div className={classes.buttonContainerCss}>
-                <ContactButton />
-                <ResearchButton />
-                <AboutButton />
+                <ToolbarButton
+                  title="Contact"
+                  timeout={2000}
+                  onClick={() => this.handleClickPage(3)}
+                />
+                <ToolbarButton
+                  title="Experience"
+                  timeout={1500}
+                  onClick={() => this.handleClickPage(2)}
+                />
+                <ToolbarButton
+                  title="About"
+                  timeout={1000}
+                  onClick={() => this.handleClickPage(1)}
+                />
               </div>
             </div>
           </Toolbar>
