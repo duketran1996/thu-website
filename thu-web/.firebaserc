@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "thu-personal-website"
+  },
+  "targets": {
+    "thu-personal-website": {
+      "hosting": {
+        "thunguyen_react": [
+          "thunguyen"
+        ]
+      }
+    }
+  }
+}

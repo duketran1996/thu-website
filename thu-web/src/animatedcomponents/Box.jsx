@@ -1,7 +1,7 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useSpring, animated } from "react-spring";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -21,7 +21,10 @@ export default function Box(props) {
       height: props.heightFrom,
       background: props.colorFrom,
       opacity: props.opacityFrom,
-      boxShadow: props.boxShadowFrom
+      boxShadow: props.boxShadowFrom,
+      backgroundImage: props.backgroundImageFrom,
+      backgroundRepeat: props.backgroundRepeatFrom,
+      backgroundSize: props.backgroundSizeFrom
     },
     to: async next => {
       await next({

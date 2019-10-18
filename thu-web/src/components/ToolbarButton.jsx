@@ -6,7 +6,7 @@ import Zoom from "@material-ui/core/Zoom";
 import "../App.css";
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit
+    //margin: theme.spacing.unit
   },
   cssRoot: {
     display: "inline-block",

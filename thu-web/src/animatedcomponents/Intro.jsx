@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useTrail, animated } from "react-spring";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   trails_text: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
     color: props => props.trailTextColor,
-    textAlign: "right",
+    textAlign: "left",
     willChange: "transform, opacity",
     overflow: "hidden",
     "&>div": { overflow: "hidden" }
