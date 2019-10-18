@@ -9,6 +9,7 @@ import Vivus from "vivus";
 import ThuSign from "../svg/thusign.svg";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
+import { isTablet, isMobileOnly } from "react-device-detect";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -23,6 +24,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   root: {
+    //Unconmment for toolbar test
+    //background: `linear-gradient(to right, #FFFFFF 50%, rgb(0,0,0) 50%)`,
     width: "100%",
     zIndex: "100",
     position: "absolute"
@@ -32,77 +35,53 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
 
-  app: {
+  app_mobile: {
+    height: "80px",
+    background: "transparent",
+    boxShadow: "none"
+  },
+
+  app_tablet_desktop: {
     height: "128px",
     background: "transparent",
-    boxShadow: "none",
-    [theme.breakpoints.only("sm")]: {
-      height: "80px"
-    },
-    [theme.breakpoints.only("xs")]: {
-      height: "80px"
-    }
+    boxShadow: "none"
   },
 
-  tool: {
-    [theme.breakpoints.up("lg")]: {
-      width: "75%",
-      margin: "auto"
-    },
-    [theme.breakpoints.only("md")]: {
-      width: "90%",
-      margin: "auto"
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: "100%",
-      margin: "auto"
-    },
-    [theme.breakpoints.only("xs")]: {
-      width: "98%",
-      margin: "auto",
-      //Iphone 5
-      ["@media (height:320px)"]: { width: "90%" }
-    }
+  tool_mobile: {
+    width: "100%",
+    margin: "auto"
   },
 
-  titleContainer: {
-    [theme.breakpoints.up("md")]: {
-      height: "200px",
-      width: "320px",
-      display: "flex"
-    },
-    [theme.breakpoints.only("sm")]: {
-      marginLeft: "10px",
-      height: "160px",
-      width: "180px",
-      display: "flex"
-    },
-    [theme.breakpoints.only("xs")]: {
-      height: "120px",
-      width: "120px",
-      display: "flex",
-      //Iphone 5
-      ["@media (height:568px)"]: { width: "100px" }
-    }
+  tool_tablet: {
+    width: "90%",
+    margin: "auto"
   },
 
-  buttonContainer: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-      ["@media (min-height:300px) and (max-height:420px)"]: { display: "none" }
-    }
+  tool_desktop: {
+    width: "75%",
+    margin: "auto"
   },
 
-  sectionMobile: {
-    display: "none",
-    [theme.breakpoints.only("sm")]: {
-      ["@media (min-height:300px) and (max-height:420px)"]: { display: "flex" }
-    },
-    [theme.breakpoints.only("xs")]: {
-      display: "flex"
-    }
+  title_container_mobile: {
+    marginLeft: "10px",
+    height: "160px",
+    width: "180px",
+    display: "flex"
   },
+
+  title_container_tablet_desktop: {
+    height: "200px",
+    width: "320px",
+    display: "flex"
+  },
+
+  button_container_none: { display: "none" },
+
+  button_container_display: { display: "flex" },
+
+  section_mobile_none: { display: "none" },
+
+  section_mobile_display: { display: "flex" },
 
   menuItemTittle: {
     margin: 0,
@@ -120,6 +99,38 @@ export default function ToolbarHook(props) {
       setFill(1);
     });
   }, []);
+
+  const compatible = isMobileOnly
+    ? {
+        classTool: classes.tool_mobile,
+        classApp: classes.app_mobile,
+        classTitleContainer: classes.title_container_mobile,
+        classSectionMobile: classes.section_mobile_display,
+        classButtonContainer: classes.button_container_none
+      }
+    : isTablet
+    ? {
+        classTool: classes.tool_tablet,
+        classApp: classes.app_tablet_desktop,
+        classTitleContainer: classes.title_container_tablet_desktop,
+        classSectionMobile: classes.section_mobile_none,
+        classButtonContainer: classes.button_container_display
+      }
+    : window.outerWidth === 1112
+    ? {
+        classTool: classes.tool_tablet,
+        classApp: classes.app_tablet_desktop,
+        classTitleContainer: classes.title_container_tablet_desktop,
+        classSectionMobile: classes.section_mobile_none,
+        classButtonContainer: classes.button_container_display
+      }
+    : {
+        classTool: classes.tool_desktop,
+        classApp: classes.app_tablet_desktop,
+        classTitleContainer: classes.title_container_tablet_desktop,
+        classSectionMobile: classes.section_mobile_none,
+        classButtonContainer: classes.button_container_display
+      };
 
   function handleClickPage(pageNum) {
     props.onCurrentPage(pageNum);
@@ -165,16 +176,16 @@ export default function ToolbarHook(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar className={classes.app} position="static">
-        <Toolbar className={classes.tool}>
+      <AppBar className={compatible.classApp} position="static">
+        <Toolbar className={compatible.classTool}>
           <div
             id="thusign"
             style={fillSign}
-            className={classes.titleContainer}
+            className={compatible.classTitleContainer}
             onClick={() => handleClickPage(0)}
           />
           <div className={classes.grow} />
-          <div className={classes.buttonContainer}>
+          <div className={compatible.classButtonContainer}>
             <ToolbarButton
               title="About"
               timeout={1000}
@@ -191,7 +202,7 @@ export default function ToolbarHook(props) {
               onClick={() => handleClickPage(3)}
             />
           </div>
-          <div className={classes.sectionMobile}>
+          <div className={compatible.classSectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
