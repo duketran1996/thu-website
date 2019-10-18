@@ -71,7 +71,7 @@ export default function ExperiencePage() {
         classContainerTwo: classes.container_two_tablet_landscape
       }
     : {
-        boxHeightTo: "100%",
+        boxHeightTo: "80%",
         classContainerTwo: classes.container_two_desktop_landscape
       };
 
