@@ -61,19 +61,21 @@ export default function HomePage() {
       })
       .catch(function(error) {
         // handle error
+        setMsg("Sorry! Failed to get data.");
         console.log("Failed to get data from firebase: " + error);
       })
       .finally(function() {
         // always executed
+        setStateShow("show");
       });
 
-    let timeShow = setTimeout(() => {
-      setStateShow("show");
-    }, 1000);
+    // let timeShow = setTimeout(() => {
+    //   setStateShow("show");
+    // }, 1000);
 
-    return () => {
-      clearInterval(timeShow);
-    };
+    // return () => {
+    //   clearInterval(timeShow);
+    // };
   }, []);
 
   const Container = Keyframes.Spring({
