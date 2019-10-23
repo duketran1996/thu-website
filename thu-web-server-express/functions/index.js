@@ -1,10 +1,12 @@
-const functions = require("firebase-functions");
+//const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const serviceAccount = require("./serviceAccount.json");
 const bodyParser = require("body-parser");
 const express = require("express");
 var cors = require("cors");
 const compression = require("compression");
+
+require("dotenv").config();
 
 //Initialize express
 const app = express();
@@ -15,8 +17,13 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
+var corsOptions = {
+  origin: process.env.CORS_URL,
+  optionsSuccessStatus: 200
+};
+
 app.use(compression());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -134,8 +141,8 @@ function isTokenVerify(req, res, next) {
 }
 
 //Local testing on port 4000
-// const port = process.env.PORT || 4000;
-// app.listen(port, () => console.log(`Listen on port ${port}...`));
+const port = process.env.PORT || 4000;
+app.listen(port, () => console.log(`Listen on port ${port}...`));
 
 //Server deploy
-exports.app = functions.https.onRequest(app);
+//exports.app = functions.https.onRequest(app);
