@@ -9,7 +9,7 @@ import Vivus from "vivus";
 import ThuSign from "../svg/thusign.svg";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
-import { isTablet, isMobileOnly } from "react-device-detect";
+import { isTablet, isMobileOnly, browserName } from "react-device-detect";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -72,7 +72,8 @@ const useStyles = makeStyles(theme => ({
   title_container_tablet_desktop: {
     height: "200px",
     width: "320px",
-    display: "flex"
+    display: "flex",
+    cursor: "pointer"
   },
 
   button_container_none: { display: "none" },
@@ -116,7 +117,18 @@ export default function ToolbarHook(props) {
         classSectionMobile: classes.section_mobile_none,
         classButtonContainer: classes.button_container_display
       }
-    : window.outerWidth === 1112
+    : // Fixed for ipad pro 10.5 compatibility
+    window.outerWidth === 1194 && browserName === "Safari"
+    ? {
+        classTool: classes.tool_tablet,
+        classApp: classes.app_tablet_desktop,
+        classTitleContainer: classes.title_container_tablet_desktop,
+        classSectionMobile: classes.section_mobile_none,
+        classButtonContainer: classes.button_container_display
+      }
+    : // Fixed for ipad pro 9.7 and ipad air compatibility
+    (window.outerWidth === 1024 || window.outerWidth === 1112) &&
+      browserName === "Safari"
     ? {
         classTool: classes.tool_tablet,
         classApp: classes.app_tablet_desktop,

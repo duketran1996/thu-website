@@ -7,7 +7,7 @@ import GreetingHome from "../animatedcomponents/GreetingHome";
 import HomePic from "../animatedcomponents/HomePic";
 import { makeStyles } from "@material-ui/core/styles";
 import imgOne from "../pictures/img_1.png";
-import { isTablet, isMobileOnly } from "react-device-detect";
+import { isTablet, isMobileOnly, browserName } from "react-device-detect";
 import NeonText from "../animatedcomponents/NeonText";
 import Color from "../pictures/marble.jpg";
 //import Black from "../pictures/bicycle_black.jpeg";
@@ -150,7 +150,20 @@ export default function HomePage() {
         greetingFontSize: 100,
         homePic: classes.home_pic_tablet_landscape
       }
-    : window.outerWidth === 1112
+    : // Ipad 10.5 compatible
+    window.outerWidth === 1194 && browserName === "Safari"
+    ? {
+        introHome: classes.intro_home_tablet_landscape,
+        introHeightTrail: 110,
+        introFontSize: 100,
+        introHeight: "120px",
+        greetingHome: classes.greeting_home_tablet_landscape,
+        greetingFontSize: 100,
+        homePic: classes.home_pic_tablet_landscape
+      }
+    : // Fixed for ipad pro 9.7 and ipad air compatibility
+    (window.outerWidth === 1024 || window.outerWidth === 1112) &&
+      browserName === "Safari"
     ? {
         introHome: classes.intro_home_tablet_landscape,
         introHeightTrail: 110,

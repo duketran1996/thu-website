@@ -7,7 +7,7 @@ import ThuPic from "../animatedcomponents/ThuPic";
 import { makeStyles } from "@material-ui/core/styles";
 import imgTwo from "../pictures/img_2.jpg";
 import imgThree from "../pictures/img_3.jpg";
-import { isTablet, isMobileOnly } from "react-device-detect";
+import { isTablet, isMobileOnly, browserName } from "react-device-detect";
 import abstract from "../pictures/abstract.jpg";
 import axios from "axios";
 
@@ -65,6 +65,36 @@ const useStyles = makeStyles({
     transform: "translate(-50%, -95%)"
   },
 
+  thu_pic_two_tablet_landscape_ipad_medium: {
+    position: "absolute",
+    zIndex: 4,
+    width: "auto",
+    height: "auto",
+    top: "95%",
+    left: "40%",
+    transform: "translate(-40%, -95%)"
+  },
+
+  thu_pic_two_tablet_landscape_ipad_small: {
+    position: "absolute",
+    zIndex: 4,
+    width: "auto",
+    height: "auto",
+    top: "95%",
+    left: "40%",
+    transform: "translate(-40%, -95%)"
+  },
+
+  thu_pic_two_tablet_landscape_ipad_air: {
+    position: "absolute",
+    zIndex: 4,
+    width: "auto",
+    height: "auto",
+    top: "90%",
+    left: "40%",
+    transform: "translate(-40%, -90%)"
+  },
+
   wrapper_mobile_landscape: {
     position: "absolute",
     zIndex: 3,
@@ -113,12 +143,7 @@ export default function AboutPage() {
   const [picTwo, setPicTwo] = useState("");
   const [picThree, setPicThree] = useState("");
 
-  //Ipad Pro 12.5
-  var thuPicOneTabletWidth = window.outerWidth >= 1366 ? "504px" : "304px";
-  var thuPicOneTabletHeight = window.outerWidth >= 1366 ? "732px" : "450px";
-  var thuPicTwoTabletWidth = window.outerWidth >= 1366 ? "436px" : "320px";
-  var thuPicTwoTabletHeight = window.outerWidth >= 1366 ? "282px" : "190px";
-  var boxTwoTabletWidth = window.outerWidth >= 1366 ? "55%" : "64%";
+  //Ipad Pro 12.5 will be using desktop properties
 
   const compatible = isMobileOnly
     ? {
@@ -152,16 +177,16 @@ export default function AboutPage() {
     ? {
         thuPicOneyTilt: 2,
         thuPicOnexTilt: 6.2,
-        thuPicOneWidth: thuPicOneTabletWidth,
-        thuPicOneHeight: thuPicOneTabletHeight,
+        thuPicOneWidth: "304px",
+        thuPicOneHeight: "450px",
         thuPicOneScaleFrom: 1.4,
         thuPicOneScaleTo: 1.8,
         classPicTwo: classes.thu_pic_two_tablet_landscape,
         thuPicTwoToggle: false,
         thuPicTwoyTilt: 1.1,
         thuPicTwoxTilt: 2,
-        thuPicTwoWidth: thuPicTwoTabletWidth,
-        thuPicTwoHeight: thuPicTwoTabletHeight,
+        thuPicTwoWidth: "320px",
+        thuPicTwoHeight: "190px",
         thuPicTwoScaleFrom: 1.2,
         thuPicTwoScaleTo: 1.6,
         classIntro: classes.intro_about_tablet_landscape,
@@ -171,25 +196,26 @@ export default function AboutPage() {
         boxOneToggle: false,
         boxOneWidth: "56%",
         boxOneHeight: "85%",
-        boxTwoWidth: boxTwoTabletWidth,
+        boxTwoWidth: "64%",
         boxTwoHeightFrom: "0%",
         boxTwoHeightTo: "80%",
         classWrapper: classes.wrapper_tablet_landscape
       }
-    : window.outerWidth === 1112
+    : // Fixed for ipad pro 10.5 compatibility
+    window.outerWidth === 1194 && browserName === "Safari"
     ? {
         thuPicOneyTilt: 2,
         thuPicOnexTilt: 6.2,
-        thuPicOneWidth: thuPicOneTabletWidth,
-        thuPicOneHeight: thuPicOneTabletHeight,
+        thuPicOneWidth: "330px",
+        thuPicOneHeight: "480px",
         thuPicOneScaleFrom: 1.4,
         thuPicOneScaleTo: 1.8,
-        classPicTwo: classes.thu_pic_two_tablet_landscape,
+        classPicTwo: classes.thu_pic_two_tablet_landscape_ipad_medium,
         thuPicTwoToggle: false,
         thuPicTwoyTilt: 1.1,
         thuPicTwoxTilt: 2,
-        thuPicTwoWidth: thuPicTwoTabletWidth,
-        thuPicTwoHeight: thuPicTwoTabletHeight,
+        thuPicTwoWidth: "320px",
+        thuPicTwoHeight: "190px",
         thuPicTwoScaleFrom: 1.2,
         thuPicTwoScaleTo: 1.6,
         classIntro: classes.intro_about_tablet_landscape,
@@ -199,7 +225,65 @@ export default function AboutPage() {
         boxOneToggle: false,
         boxOneWidth: "56%",
         boxOneHeight: "85%",
-        boxTwoWidth: boxTwoTabletWidth,
+        boxTwoWidth: "64%",
+        boxTwoHeightFrom: "0%",
+        boxTwoHeightTo: "80%",
+        classWrapper: classes.wrapper_tablet_landscape
+      }
+    : // Fixed for ipad pro 9.7
+    window.outerWidth === 1024 && browserName === "Safari"
+    ? {
+        thuPicOneyTilt: 2,
+        thuPicOnexTilt: 6.2,
+        thuPicOneWidth: "308px",
+        thuPicOneHeight: "452px",
+        thuPicOneScaleFrom: 1.4,
+        thuPicOneScaleTo: 1.8,
+        classPicTwo: classes.thu_pic_two_tablet_landscape_ipad_small,
+        thuPicTwoToggle: false,
+        thuPicTwoyTilt: 1.1,
+        thuPicTwoxTilt: 2,
+        thuPicTwoWidth: "270px",
+        thuPicTwoHeight: "160px",
+        thuPicTwoScaleFrom: 1.2,
+        thuPicTwoScaleTo: 1.6,
+        classIntro: classes.intro_about_tablet_landscape,
+        introFontSize: 21,
+        introTrailTextHeight: "40px",
+        introTrailHeight: 80,
+        boxOneToggle: false,
+        boxOneWidth: "55%",
+        boxOneHeight: "85%",
+        boxTwoWidth: "64%",
+        boxTwoHeightFrom: "0%",
+        boxTwoHeightTo: "80%",
+        classWrapper: classes.wrapper_tablet_landscape
+      }
+    : // Fixed ipad air compatibility
+    window.outerWidth === 1112 && browserName === "Safari"
+    ? {
+        thuPicOneyTilt: 2,
+        thuPicOnexTilt: 6.2,
+        thuPicOneWidth: "308px",
+        thuPicOneHeight: "452px",
+        thuPicOneScaleFrom: 1.4,
+        thuPicOneScaleTo: 1.8,
+        classPicTwo: classes.thu_pic_two_tablet_landscape_ipad_air,
+        thuPicTwoToggle: false,
+        thuPicTwoyTilt: 1.1,
+        thuPicTwoxTilt: 2,
+        thuPicTwoWidth: "300px",
+        thuPicTwoHeight: "180px",
+        thuPicTwoScaleFrom: 1.2,
+        thuPicTwoScaleTo: 1.6,
+        classIntro: classes.intro_about_tablet_landscape,
+        introFontSize: 21,
+        introTrailTextHeight: "40px",
+        introTrailHeight: 80,
+        boxOneToggle: false,
+        boxOneWidth: "56%",
+        boxOneHeight: "85%",
+        boxTwoWidth: "64%",
         boxTwoHeightFrom: "0%",
         boxTwoHeightTo: "80%",
         classWrapper: classes.wrapper_tablet_landscape

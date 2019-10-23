@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTransition, animated } from "react-spring";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,6 +52,7 @@ function AppMain(props) {
   const [index, set] = useState(0);
   const onClick = useCallback(currentPage => set(currentPage));
   const { isPortrait } = props;
+  const [isIpadPortrait, setIsIpadPortrait] = useState(false);
 
   const transitions = useTransition(index, p => p, {
     from: { opacity: 0, transform: "translate3d(100%,0,0)" },
@@ -59,7 +60,35 @@ function AppMain(props) {
     leave: { opacity: 0, transform: "translate3d(-50%,0,0)" }
   });
 
-  if (isPortrait) {
+  // Fix to detect ipadOs for tablet compatibility
+  useEffect(() => {
+    if (
+      navigator.platform === "MacIntel" &&
+      navigator.maxTouchPoints > 1 &&
+      (window.orientation === 0 || window.orientation === 180)
+    ) {
+      setIsIpadPortrait(true);
+    } else {
+      setIsIpadPortrait(false);
+    }
+    window.addEventListener(
+      "orientationchange",
+      function() {
+        if (
+          navigator.platform === "MacIntel" &&
+          navigator.maxTouchPoints > 1 &&
+          (window.orientation === 0 || window.orientation === 180)
+        ) {
+          setIsIpadPortrait(true);
+        } else {
+          setIsIpadPortrait(false);
+        }
+      },
+      false
+    );
+  }, []);
+
+  if (isPortrait || isIpadPortrait) {
     return <PortraitPage />;
   } else {
     return (

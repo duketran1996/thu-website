@@ -3,7 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { config } from "react-spring";
 import Box from "../animatedcomponents/Box";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { isTablet, isMobileOnly } from "react-device-detect";
+import { isTablet, isMobileOnly, browserName } from "react-device-detect";
 import TextField from "@material-ui/core/TextField";
 import NeonText from "../animatedcomponents/NeonText";
 import Button from "@material-ui/core/Button";
@@ -301,12 +301,6 @@ export default function ContactPage() {
       });
   };
 
-  var containerFormClass =
-    window.outerHeight >= 1024
-      ? classes.container_form_tablet_ipad_pro_landscape
-      : classes.container_form_tablet_landscape;
-  var textFieldWidthTablet = window.outerHeight >= 1024 ? 500 : 400;
-
   const compatible = isMobileOnly
     ? {
         neonTextContainer: classes.neon_text_container_mobile_lanscape,
@@ -332,10 +326,11 @@ export default function ContactPage() {
         introFontSize: 21,
         introTrailTextHeight: "40px",
         introTrailHeight: 80,
-        containerForm: containerFormClass,
-        textFieldWidth: textFieldWidthTablet
+        containerForm: classes.container_form_tablet_landscape,
+        textFieldWidth: 400
       }
-    : window.outerWidth === 1112
+    : // Ipad 10.5 compatible
+    window.outerWidth === 1194 && browserName === "Safari"
     ? {
         neonTextContainer: classes.neon_text_container_tablet_lanscape,
         textOneFontSize: 80,
@@ -347,8 +342,25 @@ export default function ContactPage() {
         introFontSize: 21,
         introTrailTextHeight: "40px",
         introTrailHeight: 80,
-        containerForm: containerFormClass,
-        textFieldWidth: textFieldWidthTablet
+        containerForm: classes.container_form_tablet_landscape,
+        textFieldWidth: 400
+      }
+    : // Fixed for ipad pro 9.7 and ipad air compatibility
+    (window.outerWidth === 1024 || window.outerWidth === 1112) &&
+      browserName === "Safari"
+    ? {
+        neonTextContainer: classes.neon_text_container_tablet_lanscape,
+        textOneFontSize: 80,
+        textTwoFontSize: 130,
+        textThreeFontSize: 80,
+        textFourFontSize: 130,
+        formToggle: false,
+        notSupportToggle: true,
+        introFontSize: 21,
+        introTrailTextHeight: "40px",
+        introTrailHeight: 80,
+        containerForm: classes.container_form_tablet_landscape,
+        textFieldWidth: 400
       }
     : {
         neonTextContainer: classes.neon_text_container_desktop_lanscape,

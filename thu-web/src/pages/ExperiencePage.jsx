@@ -4,7 +4,7 @@ import { config } from "react-spring";
 import Box from "../animatedcomponents/Box";
 import Timeline from "../animatedcomponents/Timeline";
 import { makeStyles } from "@material-ui/core/styles";
-import { isTablet, isMobileOnly } from "react-device-detect";
+import { isTablet, isMobileOnly, browserName } from "react-device-detect";
 import Color from "../pictures/marble.jpg";
 import axios from "axios";
 
@@ -68,6 +68,19 @@ export default function ExperiencePage() {
     : isTablet
     ? {
         boxHeightTo: "90%",
+        classContainerTwo: classes.container_two_tablet_landscape
+      }
+    : // Ipad 10.5 compatible
+    window.outerWidth === 1194 && browserName === "Safari"
+    ? {
+        boxHeightTo: "100%",
+        classContainerTwo: classes.container_two_tablet_landscape
+      }
+    : // Fixed for ipad pro 9.7 and ipad air compatibility
+    (window.outerWidth === 1024 || window.outerWidth === 1112) &&
+      browserName === "Safari"
+    ? {
+        boxHeightTo: "110%",
         classContainerTwo: classes.container_two_tablet_landscape
       }
     : {
