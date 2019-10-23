@@ -1,11 +1,9 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const nodemailer = require("nodemailer");
 const serviceAccount = require("./serviceAccount.json");
 const bodyParser = require("body-parser");
 const express = require("express");
 var cors = require("cors");
-var jwt = require("jsonwebtoken");
 const compression = require("compression");
 
 //Initialize express
@@ -55,6 +53,7 @@ app.get("/exp", isTokenVerify, (req, res) => {
 });
 
 app.post("/send", isTokenVerify, (req, res) => {
+  const nodemailer = require("nodemailer");
   const output = `
     <p>You have a new contact request</p>
     <h3>Contact Details</h3>
@@ -113,6 +112,7 @@ app.post("/send", isTokenVerify, (req, res) => {
 
 function isTokenVerify(req, res, next) {
   if (typeof req.headers.authorization !== "undefined") {
+    var jwt = require("jsonwebtoken");
     let token = req.headers.authorization.split(" ")[1];
     db.collection("api_auth").onSnapshot(snapshot => {
       jwt.verify(
