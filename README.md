@@ -5,5 +5,3 @@ A website for Thu Nguyen build using firebase, nodejs, material-ui react and rea
 Check the latest stable branch for latest update.
 
 Web load will be slow due to firebase cold start.
-
-URL: https://minhthu.info
